@@ -23,8 +23,16 @@
 						{{ $product->priceStringFormatted() }}
 					</p>
 					<p class="text-center">
-						<button type="submit" class="btn btn-template-outlined"><i class="fa fa-shopping-cart"></i> Add to cart</button>
+						<button type="submit" class="btn btn-template-outlined"
+						onclick="getElementById('addCartForm').submit()">
+							<i class="fa fa-shopping-cart"></i> 
+							Add to cart
+						</button>
 						<button type="submit" data-toggle="tooltip" data-placement="top" title="" class="btn btn-default" data-original-title="Add to wishlist"><i class="fa fa-heart-o"></i></button>
+						<form id="addCartForm" method="post" action="{{ url('cart') }}">
+							{{ csrf_field() }}
+							<input type="hidden" name="product_id" value="{{ $product->id }}">
+						</form>
 					</p>
 				</div>
 			</div>

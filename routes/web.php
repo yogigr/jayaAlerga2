@@ -32,7 +32,10 @@ Route::get('category/{slug}', 'PageController@category');
 Route::get('product/{slug}', 'PageController@detailProduct');
 
 //cart
+Route::get('cart', 'CartController@index');
 Route::post('cart', 'CartController@store');
+Route::delete('cart/{cart}', 'CartController@destroy');
+Route::patch('cart/update', 'CartController@update');
 
 //member page
 Route::prefix('member')->group(function(){

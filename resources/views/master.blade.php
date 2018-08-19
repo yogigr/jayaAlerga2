@@ -43,8 +43,14 @@
                     </span>
                   </a>
                   @endif
-                  <a href="" class="signup-btn">
+
+                  <a href="{{ url('cart') }}" class="signup-btn">
                     <i class="fa fa-shopping-cart mr-0"></i>
+                    @if(\App\Cart::where('session_id', \Session::getId())->exists())
+                      <span class="badge badge-danger">
+                        {{ \App\Cart::where('session_id', \Session::getId())->sum('qty') }}
+                      </span>
+                    @endif
                   </a>
                 </div>
 
@@ -133,19 +139,19 @@
         </div>
       </div>
 
-      @if(Auth::check() && Auth::user()->isAdmin())
+      
       <!-- GET IT-->
       <div class="get-it">
         <div class="container">
           <div class="row">
             <div class="col-lg-8 text-center p-3">
-              <h3>Ingin lihat Halaman Depan?</h3>
+              <h3>Ingin melakukan pembelian?</h3>
             </div>
-            <div class="col-lg-4 text-center p-3">   <a href="#" class="btn btn-template-outlined-white">Lihat Halaman Depan</a></div>
+            <div class="col-lg-4 text-center p-3">   <a href="{{ url('cart') }}" class="btn btn-template-outlined-white">Lihat Keranjang</a></div>
           </div>
         </div>
       </div>
-      @endif
+
       <!-- FOOTER -->
       <footer class="main-footer">
         <div class="container">
