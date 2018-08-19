@@ -22,6 +22,7 @@ class AboutsTableSeeder extends Seeder
             'postal_code' => '45465',
         	'phone1' => '085224800600',
         	'email' => 'jayaalerga@gmail.com',
+            'logo' => 'logo.png'
         ]);
     }
 }

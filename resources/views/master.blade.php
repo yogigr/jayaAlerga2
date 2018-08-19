@@ -43,7 +43,11 @@
                     </span>
                   </a>
                   @endif
+                  <a href="" class="signup-btn">
+                    <i class="fa fa-shopping-cart mr-0"></i>
+                  </a>
                 </div>
+
                 <ul class="social-custom list-inline">
                   <li class="list-inline-item"><a href="{{ $company->instagram }}"><i class="fa fa-instagram"></i></a></li>
                   <li class="list-inline-item"><a href="{{ $company->facebook }}"><i class="fa fa-facebook"></i></a></li>
@@ -75,7 +79,8 @@
                 <li class="nav-item {{ request()->segment(1) == '' ? 'active' : '' }}">
                   <a href="{{ url('/') }}">Home</a>
                 </li>
-                 <li class="nav-item {{ request()->segment(1) == 'shop' ? 'active' : '' }}">
+                 <li class="nav-item {{ request()->segment(1) == 'shop' || request()->segment(1) == 'product'
+                 || request()->segment(1) == 'category' ? 'active' : '' }}">
                   <a href="{{ url('shop') }}">Belanja</a>
                 </li>
               </ul>
@@ -185,6 +190,7 @@
     </div>
     <!-- Javascript files-->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/front.js') }}"></script>
     @stack('scripts')
   </body>
 </html>

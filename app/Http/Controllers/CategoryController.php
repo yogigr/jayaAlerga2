@@ -25,7 +25,8 @@ class CategoryController extends Controller
     	]);
 
     	Category::create([
-    		'name' => $request->category_name
+    		'name' => $request->category_name,
+            'slug' => str_slug($request->category_name)
     	]);
 
     	return redirect()->route('admin.category.index')->with('status', 'Berhasil menambah kategori');

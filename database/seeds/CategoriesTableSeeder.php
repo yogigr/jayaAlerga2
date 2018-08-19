@@ -16,12 +16,14 @@ class CategoriesTableSeeder extends Seeder
         	[
         		'id' => 1,
         		'name' => 'Sandal',
+                'slug' => 'sandal',
         		'created_at' => now(),
         		'updated_at' => now()
         	],
         	[
         		'id' => 2,
         		'name' => 'Sepatu',
+                'slug' => 'sepatu',
         		'created_at' => now(),
         		'updated_at' => now()
         	],
