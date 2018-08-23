@@ -22,34 +22,20 @@ class OrderStatusesTableSeeder extends Seeder
         	],
         	[
         		'id' => 2,
-        		'name' => 'New',
-        		'description' => 'Pesanan baru yang belum atau sedang direview',
-        		'created_at' => now(),
-        		'updated_at' => now()
-        	],
-        	[
-        		'id' => 3,
         		'name' => 'In Progress',
         		'description' => 'Pesanan dalam proses',
         		'created_at' => now(),
         		'updated_at' => now()
         	],
         	[
-        		'id' => 4,
-        		'name' => 'Cancelled',
-        		'description' => 'Pesanan dibatalkan',
-        		'created_at' => now(),
-        		'updated_at' => now()
-        	],
-        	[
-        		'id' => 5,
+        		'id' => 3,
         		'name' => 'On The Way',
         		'description' => 'Pesanan telah dikirim',
         		'created_at' => now(),
         		'updated_at' => now()
         	],
         	[
-        		'id' => 6,
+        		'id' => 4,
         		'name' => 'Delivered',
         		'description' => 'Pesanan sudah sampai ke tangan pembeli',
         		'created_at' => now(),

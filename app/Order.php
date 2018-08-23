@@ -9,7 +9,7 @@ class Order extends Model
 {
     protected $fillable = [
     	'code', 'full_name', 'address', 'city_id', 'province_id', 'postal_code',
-    	'phone', 'delivery_service', 'shipping_cost', 'subtotal', 'user_id', 'order_status_id'
+    	'phone', 'delivery_service', 'shipping_cost', 'subtotal', 'user_id', 'order_status_id', 'resi_number'
     ];
 
     /**
@@ -55,18 +55,14 @@ class Order extends Model
     public function getBadge()
     {
         if ($this->order_status_id == 1) {
-            return 'badge badge-light';
+            return 'badge badge-warning';
         } elseif ($this->order_status_id == 2) {
-            return 'badge badge-dark';
+            return 'badge badge-primary';
         } elseif ($this->order_status_id == 3) {
             return 'badge badge-info';
         } elseif ($this->order_status_id == 4) {
-            return 'badge badge-danger';
-        } elseif ($this->order_status_id == 5) {
-            return 'badge badge-primary';
-        } elseif ($this->order_status_id == 6) {
             return 'badge badge-success';
-        }
+        } 
     }
 
     public function hasPaymentConfirmation()

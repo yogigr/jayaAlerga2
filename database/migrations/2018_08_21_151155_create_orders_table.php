@@ -27,6 +27,7 @@ class CreateOrdersTable extends Migration
             $table->decimal('subtotal', 8, 0);
             $table->integer('user_id')->unsigned();
             $table->integer('order_status_id')->unsigned()->default(1);
+            $table->string('resi_number')->nullable();
             $table->timestamps();
 
             $table->foreign('city_id')->references('id')->on('cities');

@@ -31,7 +31,7 @@ class CartController extends Controller
     		]);
     	}
 
-    	return redirect()->back();
+    	return redirect()->back()->with('status', 'Berhasil menambahkan produk ke keranjang.');
     }
 
     public function destroy(Cart $cart)

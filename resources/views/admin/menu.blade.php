@@ -5,6 +5,14 @@
 		</div>
 		<div class="panel-body">
 			 <ul class="nav nav-pills flex-column text-sm">
+                 <li class="nav-item">
+                    <a href="{{ url('admin/order') }}" 
+                    class="nav-link {{ request()->segment(1) == 'admin' 
+                    && request()->segment(2) == 'order' ? 'active' : '' }}">
+                        <i class="fa fa-shopping-cart"></i>
+                        Pesanan
+                    </a>
+                </li>
                 <li class="nav-item">
                     <a href="{{ url('admin/product') }}" 
                     class="nav-link {{ request()->segment(1) == 'admin' 

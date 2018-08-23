@@ -7,10 +7,9 @@
             <ul class="nav nav-pills flex-column text-sm">
                 <li class="nav-item">
                     <a href="{{ url('member/order') }}" 
-                    class="nav-link {{ (request()->segment(1) == 'member' 
-                    && request()->segment(2)) || (request()->segment(1) == 'member' && request()->segment(2) == 'payment-confirmation') == 'order' ? 'active' : '' }}">
+                    class="nav-link {{ request()->segment(1) == 'member' && request()->segment(2) == 'order' ? 'active' : (request()->segment(1) == 'member' && request()->segment(2) == 'payment-confirmation' ? 'active' : '') }}">
                         <i class="fa fa-list"></i> 
-                        My orders
+                        Pesanan Saya
                     </a>
                 </li>
                 <li class="nav-item">
@@ -18,7 +17,7 @@
                     class="nav-link {{ request()->segment(1) == 'member' 
                     && request()->segment(2) == 'wishlist' ? 'active' : '' }}">
                         <i class="fa fa-heart"></i> 
-                        My wishlist
+                        Wishlist Saya
                     </a>
                 </li>
                 <li class="nav-item">
@@ -26,14 +25,14 @@
                     class="nav-link {{ request()->segment(1) == 'member' 
                     && request()->segment(2) == 'account' ? 'active' : '' }}">
                         <i class="fa fa-user"></i> 
-                        My account
+                        Akun Saya
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="javascript:void(0)" class="nav-link"
                     onclick="getElementById('logoutForm').submit()">
                         <i class="fa fa-sign-out"></i> 
-                        Logout
+                        Keluar
                     </a>
                     <form id="logoutForm" method="post" action="{{ url('logout') }}">
                     {{ csrf_field() }}

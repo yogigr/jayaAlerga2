@@ -32,7 +32,7 @@ Route::get('category/{slug}', 'PageController@category');
 Route::get('product/{slug}', 'PageController@detailProduct');
 
 //cart
-Route::get('cart', 'CartController@index');
+Route::get('cart', 'CartController@index')->name('cart.index');
 Route::post('cart', 'CartController@store');
 Route::delete('cart/{cart}', 'CartController@destroy');
 Route::patch('cart/update', 'CartController@update');
@@ -57,8 +57,9 @@ Route::prefix('member')->group(function(){
 	Route::patch('change-password', 'MemberController@changePassword');
 
 	//order
-	Route::get('order', 'OrderController@index');
-	Route::get('order/{order}', 'OrderController@show');
+	Route::get('order', 'OrderController@index')->name('member.order.index');
+	Route::get('order/{order}', 'OrderController@show')->name('member.order.show');
+	Route::patch('order/{order}/set-delivered', 'OrderController@setDelivered');
 
 	//payment confirmation
 	Route::get('payment-confirmation/{order}', 'PaymentConfirmationController@create');
@@ -89,4 +90,9 @@ Route::prefix('admin')->group(function(){
 	Route::get('product/{slug}', 'ProductController@show')->name('admin.product.show');
 	Route::patch('product/{product}', 'ProductController@update');
 	Route::delete('product/{product}', 'ProductController@destroy');
+
+	Route::get('order', 'OrderController@index')->name('admin.order.index');
+	Route::get('order/{order}', 'OrderController@show')->name('admin.order.show');
+	Route::patch('order/{order}/process', 'OrderController@process');
+	Route::patch('order/{order}/send', 'OrderController@send');
 });

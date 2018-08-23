@@ -1,14 +1,14 @@
 @extends('master')
 @section('title', 'Pesanan '.$order->getCode())
 @section('breadcrumb')
-<li class="breadcrumb-item"><a href="#">Member</a></li>
-<li class="breadcrumb-item"><a href="{{ url('member/order') }}">Pesanan</a></li>
+<li class="breadcrumb-item"><a href="{{ url('admin') }}">Admin</a></li>
+<li class="breadcrumb-item"><a href="{{ url('admin/order') }}">Pesanan</a></li>
 <li class="breadcrumb-item active">{{ $order->getCode() }}</li>
 @endsection
 @section('content')
 <div class="row bar">
-	@include('member.menu')
-	<div id="customer-order" class="col-lg-9">
+	@include('admin.menu')
+	<div class="col-lg-9">
 		@if(session('status'))
 		<div class="alert alert-success alert-dismissible fade show" role="alert">
 			{{ session('status') }}
@@ -17,35 +17,21 @@
 			</button>
 		</div>
 		@endif
-		<p class="lead">
+		
+		<p>
 			Pesanan {{ $order->getCode() }} telah dibuat pada <strong>{{ $order->tanggalWaktu() }}</strong> dan dalam status <strong>{{ $order->order_status->name }}</strong>.
 			<button type="button" class="btn btn-secondary btn-sm rounded-circle" data-container="body" data-toggle="popover" data-placement="right" data-content="{{ $order->order_status->description }}">
 				<i class="fa fa-question"></i>
 			</button>
 		</p>
-		@if($order->order_status_id == 1)
-			<a href="{{ url('member/payment-confirmation/'.$order->code) }}"
-			class="btn btn-warning mb-2">Konfirmasi Pembayaran</a>
-		@elseif($order->order_status_id == 3)
-			<form method="post" action="{{ url('member/order/'.$order->code.'/set-delivered') }}" class="mb-2">
-				{{ csrf_field() }}
-				{{ method_field('patch') }}
-				<button type="submit" class="btn btn-warning"
-				onclick="return confirm('Anda yakin?')">Konfirmasi Pesanan Diterima</button>
-				<button type="button" class="btn btn-secondary btn-sm rounded-circle" data-container="body" data-toggle="popover" data-placement="right" data-content="Apabila barang / pesanan sudah sampai ditangan anda, harap konfirmasi dengan menekan tombol Konfirmasi Pesanan Diterima">
-					<i class="fa fa-question"></i>
-				</button>
-			</form>
-			<div class="card card-body">
-				<h3>Nomor Resi Pengiriman</h3>
-				<p>{{ $order->resi_number }}</p>
-			</div>
-		@endif
-		<div class="card">
+
+		@include('admin.order.action')
+		
+		<div class="card mt-2">
 			<div class="card-body">
 				<h3 class="text-uppercase">Detail Pesanan</h3>
 				<div class="table-responsive">
-					<table class="table">
+					<table class="table table-striped">
 						<thead>
 							<tr>
 								<th colspan="2">Produk</th>
@@ -87,8 +73,7 @@
 					</table>
 				</div>
 			</div>
-		</div>
-			
+		</div>	
 		<div class="card">
 			<div class="card-body">
 				<h3 class="text-uppercase">Alamat Pengiriman</h3>

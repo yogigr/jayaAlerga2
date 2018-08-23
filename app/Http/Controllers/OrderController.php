@@ -19,6 +19,17 @@ class OrderController extends Controller
 
     public function index()
     {
+        if (Auth::user()->isAdmin() || Auth::user()->isOperator()) {
+            if (request('query')) {
+                $orders = Order::where('code', 'like', '%'.request('query').'%')
+                ->paginate(10)->appends(request()->except('page'));
+            } else {
+                $orders = Order::orderBy('order_status_id', 'asc')->paginate(10);
+            }
+            
+            return view('admin.order.index', compact('orders'));
+        }
+
     	$orders = Auth::user()->orders()->orderBy('created_at', 'desc')->paginate(10);
     	return view('member.order.index', compact('orders'));
     }
@@ -63,6 +74,36 @@ class OrderController extends Controller
 
     public function show(Order $order)
     {
+        if (Auth::user()->isAdmin() || Auth::user()->isOperator()) {
+            return view('admin.order.show', compact('order'));
+        }
     	return view('member.order.show', compact('order'));
+    }
+
+    public function setDelivered(Order $order)
+    {
+        $order->order_status_id = 4;
+        $order->save();
+
+        return back()->with('status', 'Anda sudah konfirmasi bahwa pesanan anda sudah sampai.');
+    }
+
+    public function process(Order $order)
+    {
+        $order->order_status_id = 2;
+        $order->save();
+        return back()->with('status', 'Pembayaran selesai');
+    }
+
+    public function send(Request $request, Order $order)
+    {
+        $request->validate([
+            'resi_number' => 'required'
+        ]);
+
+        $order->resi_number = $request->resi_number;
+        $order->order_status_id = 3;
+        $order->save();
+        return back()->with('status', 'Pesanan sudah dikirim');
     }
 }
