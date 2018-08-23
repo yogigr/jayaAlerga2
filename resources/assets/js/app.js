@@ -22,3 +22,11 @@ require('./bootstrap');
 //});
 require('owl.carousel');
 require('bootstrap-select');
+
+// bootstrap popover
+$(function () {
+  $('[data-toggle="popover"]').popover();
+});
+
+//bootstrap datepicker
+require('bootstrap-datepicker');

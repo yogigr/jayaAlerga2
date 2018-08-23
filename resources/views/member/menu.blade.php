@@ -7,8 +7,8 @@
             <ul class="nav nav-pills flex-column text-sm">
                 <li class="nav-item">
                     <a href="{{ url('member/order') }}" 
-                    class="nav-link {{ request()->segment(1) == 'member' 
-                    && request()->segment(2) == 'order' ? 'active' : '' }}">
+                    class="nav-link {{ (request()->segment(1) == 'member' 
+                    && request()->segment(2)) || (request()->segment(1) == 'member' && request()->segment(2) == 'payment-confirmation') == 'order' ? 'active' : '' }}">
                         <i class="fa fa-list"></i> 
                         My orders
                     </a>

@@ -25,4 +25,14 @@ class Province extends Model
     {
         return $this->hasMany('App\User');
     }
+
+    public function checkouts()
+    {
+        return $this->hasMany('App\Checkout');
+    }
+
+    public function orders()
+    {
+        return $this->hasMany('App\Order');
+    }
 }

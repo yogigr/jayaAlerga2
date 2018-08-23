@@ -69,7 +69,7 @@
 					<div class="left-col"><a href="{{ url('shop') }}" class="btn btn-secondary mt-0"><i class="fa fa-chevron-left"></i> Lanjutkan Berbelanja</a></div>
 					<div class="right-col">
 						<button type="submit" class="btn btn-secondary"><i class="fa fa-refresh"></i> Update Keranjang</button>
-						<button type="button" class="btn btn-template-outlined">Lanjutkan ke pembayaran <i class="fa fa-chevron-right"></i></button>
+						<a id="checkoutBtn" href="{{ url('checkout') }}" class="btn btn-template-outlined">Lanjutkan ke pembayaran <i class="fa fa-chevron-right"></i></a>
 					</div>
 				</div>
 			</form>

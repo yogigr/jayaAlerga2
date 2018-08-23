@@ -16,4 +16,9 @@ class SessionData extends Model
     {
     	return $this->hasMany('App\Cart');
     }
+
+    public function checkouts()
+    {
+    	return $this->hasOne('App\Checkout');
+    }
 }

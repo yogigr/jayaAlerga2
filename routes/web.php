@@ -12,7 +12,7 @@
 */
 
 // Authentication Routes...
-$this->get('login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
@@ -37,11 +37,32 @@ Route::post('cart', 'CartController@store');
 Route::delete('cart/{cart}', 'CartController@destroy');
 Route::patch('cart/update', 'CartController@update');
 
+//checkout
+Route::get('checkout', 'CheckoutController@newCheckout')->name('checkout.new');
+Route::get('checkout/address', 'CheckoutController@addressForm')->name('checkout.address');
+Route::post('checkout/address', 'CheckoutController@address');
+Route::get('checkout/shipping', 'CheckoutController@shippingForm')->name('checkout.shipping');
+Route::post('checkout/shipping', 'CheckoutController@shipping');
+Route::get('checkout/payment', 'CheckoutController@paymentForm')->name('checkout.payment');
+Route::post('checkout/payment', 'CheckoutController@payment');
+Route::get('checkout/review', 'CheckoutController@review')->name('checkout.review');
+
+//order
+Route::post('order', 'OrderController@store');
+
 //member page
 Route::prefix('member')->group(function(){
 	Route::get('account', 'MemberController@account')->name('member.account');
 	Route::patch('account', 'MemberController@updateAccount');
 	Route::patch('change-password', 'MemberController@changePassword');
+
+	//order
+	Route::get('order', 'OrderController@index');
+	Route::get('order/{order}', 'OrderController@show');
+
+	//payment confirmation
+	Route::get('payment-confirmation/{order}', 'PaymentConfirmationController@create');
+	Route::post('payment-confirmation/{order}', 'PaymentConfirmationController@store');
 });
 
 Route::prefix('admin')->group(function(){
