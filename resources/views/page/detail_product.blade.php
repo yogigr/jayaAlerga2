@@ -16,6 +16,14 @@
 			</button>
 		</div>
 		@endif
+		@if(session('info'))
+		<div class="alert alert-info alert-dismissible fade show" role="alert">
+			{{ session('info') }}
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		@endif
 		<div id="productMain" class="row">
 			<div class="col-sm-6">
 				<img src="{{ is_null($product->photo) ? asset('images/product/null.jpg')
@@ -41,8 +49,14 @@
 							<i class="fa fa-shopping-cart"></i> 
 							Add to cart
 						</button>
-						<button type="submit" data-toggle="tooltip" data-placement="top" title="" class="btn btn-default" data-original-title="Add to wishlist"><i class="fa fa-heart-o"></i></button>
+						<button type="submit" data-toggle="tooltip" data-placement="top" title="" class="btn btn-default" data-original-title="Add to wishlist" onclick="getElementById('addToWishlistForm').submit()">
+							<i class="fa fa-heart-o"></i>
+						</button>
 						<form id="addCartForm" method="post" action="{{ url('cart') }}">
+							{{ csrf_field() }}
+							<input type="hidden" name="product_id" value="{{ $product->id }}">
+						</form>
+						<form id="addToWishlistForm" method="post" action="{{ url('member/wishlist') }}">
 							{{ csrf_field() }}
 							<input type="hidden" name="product_id" value="{{ $product->id }}">
 						</form>

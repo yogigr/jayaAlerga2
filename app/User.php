@@ -70,4 +70,9 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Order');
     }
+
+    public function wishlists()
+    {
+        return $this->hasMany('App\Wishlist');
+    }
 }

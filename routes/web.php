@@ -64,6 +64,11 @@ Route::prefix('member')->group(function(){
 	//payment confirmation
 	Route::get('payment-confirmation/{order}', 'PaymentConfirmationController@create');
 	Route::post('payment-confirmation/{order}', 'PaymentConfirmationController@store');
+
+	//wishlist
+	Route::get('wishlist', 'WishlistController@index');
+	Route::post('wishlist', 'WishlistController@store');
+	Route::delete('wishlist/{wishlist}', 'WishlistController@destroy');
 });
 
 Route::prefix('admin')->group(function(){
@@ -92,6 +97,7 @@ Route::prefix('admin')->group(function(){
 	Route::delete('product/{product}', 'ProductController@destroy');
 	Route::patch('product/{product}/add-stock', 'ProductController@addStock');
 
+	//order
 	Route::get('order', 'OrderController@index')->name('admin.order.index');
 	Route::get('order/{order}', 'OrderController@show')->name('admin.order.show');
 	Route::patch('order/{order}/process', 'OrderController@process');
