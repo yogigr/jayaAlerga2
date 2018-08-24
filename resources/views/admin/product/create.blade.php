@@ -82,7 +82,18 @@
 					</div>
 					<div class="row">
 						<div class="col-md-6">
-							<div class="custom-file">
+							<div class="form-group">
+								<label>Stok Awal</label>
+								<input type="number" name="stock" value="{{ old('stock') }}"
+								class="form-control {{ $errors->has('stock') ? 'is-invalid' : '' }}"
+								autocomplete="off">
+								@if($errors->has('stock'))
+								<div class="invalid-feedback">{{ $errors->first('stock') }}</div>
+								@endif
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="custom-file mt-4">
 								<input type="file" name="photo" 
 								class="custom-file-input {{ $errors->has('photo') ? 'is-invalid' : '' }}">
 								<label class="custom-file-label" for="validatedCustomFile">Upload photo produk</label>

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Traits\OrderTrait;
 use App\Order;
 use App\OrderDetail;
+use App\Stock;
 use Auth;
 
 class OrderController extends Controller
@@ -92,6 +93,14 @@ class OrderController extends Controller
     {
         $order->order_status_id = 2;
         $order->save();
+
+        //mengurangi stock
+        foreach ($order->details as $detail) {
+            $stock = Stock::where('product_id', $detail->product_id)->firstOrFail();
+            $stock->total -= $detail->qty;
+            $stock->save();
+        }
+
         return back()->with('status', 'Pembayaran selesai');
     }
 

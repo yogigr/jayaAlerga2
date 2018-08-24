@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\SessionData;
+use App\Product;
 use App\Cart;
 use Session;
 

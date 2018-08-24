@@ -90,6 +90,7 @@ Route::prefix('admin')->group(function(){
 	Route::get('product/{slug}', 'ProductController@show')->name('admin.product.show');
 	Route::patch('product/{product}', 'ProductController@update');
 	Route::delete('product/{product}', 'ProductController@destroy');
+	Route::patch('product/{product}/add-stock', 'ProductController@addStock');
 
 	Route::get('order', 'OrderController@index')->name('admin.order.index');
 	Route::get('order/{order}', 'OrderController@show')->name('admin.order.show');

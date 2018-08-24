@@ -36,12 +36,13 @@
 					<div class="col-lg-12">
 						<div class="table-responsive">
 							<table class="table table-bordered">
-								<thead>
+								<thead class="thead-dark">
 									<tr>
 										<th>#</th>
 										<th>Nama Product</th>
 										<th>Berat</th>
 										<th>Harga</th>
+										<th>Stock</th>
 										<th>#</th>
 									</tr>
 								</thead>
@@ -58,6 +59,7 @@
 												<td>{{ $product->name }}</td>
 												<td class="text-right">{{ $product->weightInKilo() }}</td>
 												<td class="text-right">{{ $product->priceStringFormatted() }}</td>
+												<td class="text-right">{{ $product->stock->total }}</td>
 												<td>
 													<div class="btn-group btn-group-sm">
 														<a href="{{ url('admin/product/'.$product->slug) }}" class="btn btn-warning">
@@ -67,7 +69,35 @@
 														url="{{ url('admin/product/'.$product->id) }}">
 															<i class="fa fa-trash"></i>
 														</button>
+														<button class="btn btn-primary" data-toggle="collapse"
+														data-target="#collapse_{{ $product->id }}">
+															<i class="fa fa-plus"></i>
+															Stok
+														</button>
 													</div>
+												</td>
+											</tr>
+											<tr class="collapse" id="collapse_{{ $product->id }}">
+												<td colspan="6">
+													<form method="post" action="{{ url('admin/product/'.$product->id.'/add-stock') }}">
+														{{ csrf_field() }}
+														{{ method_field('patch') }}
+														<div class="row">
+															<div class="col-sm-6">
+																<div class="form-group">
+																	<input type="number" name="stock" class="form-control" style="max-width: 100%">
+																</div>
+															</div>
+															<div class="col-sm-6">
+																<div class="form-group">
+																	<button type="submit" class="btn btn-primary">
+																		<i class="fa fa-plus"></i>
+																		Stok
+																	</button>
+																</div>
+															</div>
+														</div>
+													</form>
 												</td>
 											</tr>
 										@endforeach

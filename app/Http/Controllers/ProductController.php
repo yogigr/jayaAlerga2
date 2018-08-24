@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Product;
 use App\Category;
+use App\Stock;
 use Image;
 use File;
 
@@ -41,6 +42,7 @@ class ProductController extends Controller
     		'product_weight' => 'required|numeric',
     		'product_price' => 'required|numeric',
     		'category_id' => 'required|numeric',
+            'stock' => 'required|numeric',
     		'photo' => 'required|image|mimes:jpeg,png|max:200'
     	]);
 
@@ -62,6 +64,12 @@ class ProductController extends Controller
     	$product->slug = $slug;
     	$product->photo = $photo;
     	$product->save();
+
+        //tambah stock
+        Stock::create([
+            'product_id' => $product->id,
+            'total' => $request->stock
+        ]);
 
     	return redirect()->route('admin.product.index')
     	->with('status', 'Berhasil menambah produk.');
@@ -114,6 +122,13 @@ class ProductController extends Controller
     	$product->delete();
     	return redirect()->route('admin.product.index')
     	->with('status', 'Berhasil hapus produk');
+    }
+
+    public function addStock(Request $request, Product $product)
+    {
+        $product->stock->total += $request->stock;
+        $product->stock->save();
+        return redirect('admin/product')->with('status', 'Berhasil menambah stok '.$product->name);
     }
 
     private function upload_photo($request, $slug)

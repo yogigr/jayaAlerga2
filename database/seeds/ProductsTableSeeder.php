@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Product;
+use App\Stock;
 
 class ProductsTableSeeder extends Seeder
 {
@@ -74,6 +75,25 @@ Brown",
         		'created_at' => now(),
         		'updated_at' => now()
         	],
+        ]);
+
+        Stock::insert([
+            [
+                'product_id' => 1,
+                'total' => 10,
+            ],
+            [
+                'product_id' => 2,
+                'total' => 10,
+            ],
+            [
+                'product_id' => 3,
+                'total' => 10,
+            ],
+            [
+                'product_id' => 4,
+                'total' => 10,
+            ]
         ]);
     }
 }

@@ -10,7 +10,7 @@ class PageController extends Controller
 {
     public function index()
     {
-    	$products = Product::orderBy('created_at', 'desc')->take(6)->get();
+    	$products = Product::orderBy('created_at', 'desc')->take(4)->get();
     	return view('page.index', compact('products'));
     }
 

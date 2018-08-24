@@ -22,17 +22,22 @@
 				: asset('images/product/'.$product->photo) }}" class="img-fluid mx-auto d-block img-thumbnail">
 			</div>
 			<div class="col-sm-6">
-				<div class="box">
+				<div class="box mt-0">
 					<div class="sizes">
 						<h3>Berat Barang</h3>
 						<p>{{ $product->weightInKilo() }}</p>
+					</div>
+					<div class="sizes">
+						<h3>Stok</h3>
+						<p>{{ $product->stock->total }}</p>
 					</div>
 					<p class="price">
 						{{ $product->priceStringFormatted() }}
 					</p>
 					<p class="text-center">
 						<button type="submit" class="btn btn-template-outlined"
-						onclick="getElementById('addCartForm').submit()">
+						onclick="getElementById('addCartForm').submit()" 
+						{{ $product->stock->total < 1 ? 'disabled' : '' }}>
 							<i class="fa fa-shopping-cart"></i> 
 							Add to cart
 						</button>
